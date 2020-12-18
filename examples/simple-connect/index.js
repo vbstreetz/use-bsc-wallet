@@ -7,6 +7,8 @@ import {
 } from 'use-bsc-wallet'
 import TokenAmount from 'token-amount'
 
+const IS_TESTNET = ~window.location.href.indexOf('testnet')
+
 function App() {
   const wallet = useWallet()
   const blockNumber = wallet.getBlockNumber()
@@ -15,6 +17,19 @@ function App() {
   return (
     <>
       <h1>use-bsc-wallet</h1>
+
+      <div style={{ marginBottom: 20 }}>
+        To target{' '}
+        {IS_TESTNET
+          ? 'mainnet: remove "?testnet" from'
+          : 'testnet: add "?testnet" to'}{' '}
+        the location bar <br />
+        e.g.{' '}
+        <a href={`${window.location.origin}${IS_TESTNET ? '' : '?testnet'}`}>
+          {window.location.origin}
+          {IS_TESTNET ? '' : '?testnet'}
+        </a>
+      </div>
 
       {(() => {
         if (wallet.error?.name) {
@@ -97,11 +112,12 @@ function App() {
 
 ReactDOM.render(
   <UseWalletProvider
+    testnet={IS_TESTNET}
     connectors={{
       fortmatic: { apiKey: '' },
       portis: { dAppId: '' },
       walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
-      bsc: {}
+      bsc: {},
     }}
   >
     <App />
