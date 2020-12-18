@@ -6,7 +6,7 @@ import {
   ConnectionRejectedError,
   UseWalletProvider,
   useWallet,
-} from 'use-wallet'
+} from 'use-bsc-wallet'
 
 function App() {
   const wallet = useWallet()
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-      <h1>use-wallet</h1>
+      <h1>use-bsc-wallet</h1>
 
       {(() => {
         if (wallet.error?.name) {
@@ -63,7 +63,7 @@ function App() {
               <button onClick={() => activate('walletconnect')}>
                 walletconnect
               </button>
-              <button onClick={() => activate('walletlink')}>walletlink</button>
+              <button onClick={() => activate('bsc')}>bsc extension</button>
             </div>
           </div>
         )
@@ -96,12 +96,11 @@ function App() {
 
 ReactDOM.render(
   <UseWalletProvider
-    chainId={1}
     connectors={{
       fortmatic: { apiKey: '' },
       portis: { dAppId: '' },
       walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
-      walletlink: { url: 'https://mainnet.eth.aragon.network/' },
+      bsc: {}
     }}
   >
     <App />

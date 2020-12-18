@@ -6,7 +6,7 @@ useWallet() allows dapp users to connect to the provider of their choice in a wa
 
 ## Features
 
-- All-in-one solution to connect to Ethereum providers.
+- All-in-one solution to connect to Binance Smart Chain providers.
 - Completely library agnostic (use Web3.js, ethers.js, …).
 - Provides the current balance.
 - Keeps track of the recent transactions (coming soon).
@@ -16,8 +16,6 @@ useWallet() allows dapp users to connect to the provider of their choice in a wa
 Oh yes:
 
 - React only.
-- Ethereum only (for now).
-- Supports one network at a time.
 - Embeds as many providers as possible.
 - Every prop and parameter is optional.
 
@@ -27,18 +25,12 @@ Oh yes:
 - A low-level, fully configurable connection system for Ethereum providers (see [web3-react](https://github.com/NoahZinsmeister/web3-react) if you are after that).
 - An general library to interact with Ethereum (see ethers.js, Web3.js, etc.).
 
-### Used by
-
-- [Aragon client](https://github.com/aragon/aragon)
-- [Aragon’s Court Dashboard](https://github.com/aragon/court-dashboard)
-- _(Your project!)_
-
 ## Usage
 
 Add it to your project:
 
 ```console
-yarn add use-wallet
+yarn add use-bsc-wallet
 ```
 
 Use it in your React app:
@@ -47,7 +39,7 @@ Use it in your React app:
 // App.js
 
 import React from 'react'
-import { useWallet, UseWalletProvider } from 'use-wallet'
+import { useWallet, UseWalletProvider } from 'use-bsc-wallet'
 
 function App() {
   const wallet = useWallet()
@@ -66,8 +58,9 @@ function App() {
         <div>
           Connect:
           <button onClick={() => wallet.connect()}>MetaMask</button>
-          <button onClick={() => wallet.connect('frame')}>Frame</button>
-          <button onClick={() => wallet.connect('portis')}>Portis</button>
+          <button onClick={() => wallet.connect('bsc')}>
+            BSC Wallet Extension
+          </button>
         </div>
       )}
     </>
@@ -77,10 +70,10 @@ function App() {
 // Wrap everything in <UseWalletProvider />
 export default () => (
   <UseWalletProvider
-    chainId={1}
+    testnet={true}
     connectors={{
       // This is how connectors get configured
-      portis: { dAppId: 'my-dapp-id-123-xyz' },
+      bsc: {},
     }}
   >
     <App />
@@ -94,9 +87,9 @@ export default () => (
 
 This is the provider component. It should be placed above any component using `useWallet()`. Apart from `children`, it accepts two other props:
 
-#### chainId
+#### testnet
 
-The [Chain ID](https://chainid.network/) supported by the connection. Defaults to 1.
+Whether to use testnet instead of mainnet.
 
 #### connectors
 
@@ -110,9 +103,7 @@ Configuration for the different connectors. If you use a connector that requires
 - `authereum`: no configuration needed.
 - `squarelink`: `{ clientId, options }`
 - `walletconnect`: `{ rpcUrl }`
-- `walletlink`: `{ url, appName, appLogoUrl }`
-
-See the [web3-react documentation](https://github.com/NoahZinsmeister/web3-react/tree/v6/docs) for more details.
+- `bsc`: `{ }`
 
 ### useWallet()
 

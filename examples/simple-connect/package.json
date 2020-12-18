@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "parcel serve index.html",
+    "start": "parcel serve index.html --port 2222",
     "build": "parcel build index.html"
   },
   "dependencies": {
@@ -8,7 +8,7 @@
     "react": "link:../../node_modules/react",
     "react-dom": "link:../../node_modules/react-dom",
     "token-amount": "^0.1.0",
-    "use-wallet": "link:../.."
+    "use-bsc-wallet": "link:../.."
   },
   "alias": {
     "react": "../../node_modules/react",

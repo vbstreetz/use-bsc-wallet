@@ -37,6 +37,8 @@ import {
   getBlockNumber,
   getNetworkName,
   pollEvery,
+  MAINNET_ID,
+  TESTNET_ID,
 } from './utils'
 
 const NO_BALANCE = '-1'
@@ -52,7 +54,7 @@ type WalletContext = {
 } | null
 
 type UseWalletProviderProps = {
-  chainId: number
+  testnet: boolean
   children: ReactNode
   connectors: { [key: string]: Connector | ConnectorConfig }
   pollBalanceInterval: number
@@ -242,7 +244,7 @@ function useWatchBlockNumber({
 }
 
 function UseWalletProvider({
-  chainId,
+  testnet,
   children,
   // connectors contains init functions and/or connector configs.
   connectors: connectorsInitsOrConfigs,
@@ -255,6 +257,7 @@ function UseWalletProvider({
     throw new Error('<UseWalletProvider /> has already been declared.')
   }
 
+  const chainId = testnet ? TESTNET_ID : MAINNET_ID
   const [connector, setConnector] = useState<string | null>(null)
   const [error, setError] = useState<Error | null>(null)
   const [type, setType] = useState<AccountType | null>(null)

@@ -5,7 +5,7 @@
     "react": "link:../../node_modules/react",
     "react-dom": "link:../../node_modules/react-dom",
     "token-amount": "^0.2.0",
-    "use-wallet": "link:../.."
+    "use-bsc-wallet": "link:../.."
   },
   "scripts": {
     "dev": "next",
